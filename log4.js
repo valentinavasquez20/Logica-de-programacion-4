@@ -1,22 +1,38 @@
-// Solicitar un numero al user y imprimirlo en la secuencia fibonacci
-function serieFibonacci() {
-    id="number" = Numero
-    let Numero = prompt("Ingrese un número para la secuencia Fibonacci");
+const numero = document.getElementById("numero");
+const calcular = document.getElementById("calcular");
+const resultado = document.getElementById("resultado");
 
-    while (isNaN(Numero) || Numero === null || Numero === "") {
-        Numero = prompt("Por favor, ingrese un número válido:");
+if (calcular) {
+  calcular.addEventListener("click", () => {
+    let numeroIngresado = numero.value;
+
+    let numeroFloat = parseFloat(numeroIngresado);
+
+    if (isNaN(numeroFloat)) {
+      resultado.textContent = "El dato de entrada no es un número válido.";
+      return;
     }
 
-    let num1 = parseInt(Numero);
-    let fibonacci = [0, 1];
+    let secuenciaFibonacci = calcularFactorial(numeroFloat); // Llamar a la función para calcular la secuencia
 
-    for (let i = 2; i < num1; i++) {
-        fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
-    }
+    resultado.textContent = secuenciaFibonacci.join(" ");
+  });
+}
 
-    console.log("La serie Fibonacci es:");
+function calcularFactorial(numero) {
+  let f0 = 0;
+  let f1 = 1;
+  let f2;
 
-    for (let i = 0; i < num1; i++) {
-        console.log(fibonacci[i]);
-    }
+  const secuenciaFibonacci = [];
+
+  for (let i = 0; i < numero; i++) {
+    f2 = f0 + f1;
+    f0 = f1;
+    f1 = f2;
+
+    secuenciaFibonacci.push(f2);
+  }
+
+  return secuenciaFibonacci;
 }
